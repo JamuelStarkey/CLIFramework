@@ -83,7 +83,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
 
     protected $extensions = array();
 
-    public function __construct(CommandBase $parent = null)
+    public function __construct(?CommandBase $parent = null)
     {
         // this variable is optional (for backward compatibility)
         if ($parent) {
@@ -322,7 +322,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
      * @param string|null $path path of directory commands placed at.
      * @return void
      */
-    protected function autoloadCommands($path = null)
+    protected function autoloadCommands(?string $path = null)
     {
         $autoloader = new CommandAutoloader($this);
         $autoloader->autoload($path);
@@ -343,7 +343,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
      * @param string $command
      * @param string $class
      */
-    public function registerCommand($command, $class = null)
+    public function registerCommand(string $command, ?string $class = null)
     {
         $trace = debug_backtrace(false, 2);
         $call = $trace[0]['file'].':'.$trace[0]['line'];
@@ -394,7 +394,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
      * @param string $class   (optional) The command class. if this argument is
      *                        ignroed, the class name is automatically detected.
      */
-    public function command($command, $class = null)
+    public function command(string $command, ?string $class = null)
     {
         return $this->addCommand($command, $class);
     }
@@ -413,7 +413,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
      * @return string Loaded class name
      * @throws CommandClassNotFoundException
      */
-    public function addCommand($command, $class = null)
+    public function addCommand(string $command, ?string $class = null)
     {
         // try to load the class/subclass,
         // or generate command class name automatically.
@@ -880,7 +880,7 @@ abstract class CommandBase implements ArrayAccess, IteratorAggregate, CommandInt
      *
      * @return string user input value
      */
-    public function ask($prompt, $validAnswers = null)
+    public function ask($prompt, ?array $validAnswers = null)
     {
         $prompter = new Prompter;
         $prompter->setStyle('ask');
