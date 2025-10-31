@@ -12,7 +12,7 @@ class Prompter
     private $formatter;
     private $console;
 
-    public function __construct(ServiceContainer $container = null)
+    public function __construct(?ServiceContainer $container = null)
     {
         $container = $container ?: ServiceContainer::getInstance();
         $this->formatter = $container['formatter'];
@@ -30,7 +30,7 @@ class Prompter
     /**
      * show prompt with message
      */
-    public function ask($prompt, $validAnswers = null, $default = null)
+    public function ask($prompt, ?array $validAnswers = null, ?string $default = null)
     {
         if ($validAnswers) {
             $prompt .= ' [' . join('/', $validAnswers) . ']';
