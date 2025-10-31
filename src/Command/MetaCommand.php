@@ -33,7 +33,7 @@ class UndefinedOptionException extends Exception
     }
 }
 
-function output($str, OptionResult $opts = null)
+function output($str, ?OptionResult $opts = null)
 {
     echo $str;
 }
@@ -123,7 +123,7 @@ class MetaCommand extends Command
      *     app meta sub1.sub2.sub3 arg 1 suggestions
      *     app meta sub1.sub2.sub3 opt email valid-values
      */
-    public function execute($commandlist, $type, $arg = null, $attr = null)
+    public function execute($commandlist, $type, ?string $arg = null, ?string $attr = null)
     {
         $commandNames = explode('.', $commandlist);
         // lookup commands
